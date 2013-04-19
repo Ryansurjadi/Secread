@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<root>
+    <user_credentials>
+      <user_name>tester</user_name>
+      <password>3NeIiMnCVu47C+gIhEE8h5Ui2BIqcdl5zu2zhC78dm2Er9Sf7yrwOzvJmHfblF2zaBTZbeH/e/Nl42QiNIPeSg==</password>
+      <sessionID>$5000</sessionID>
+    </user_credentials>
+    <user_credentials>
+      <user_name>tester2</user_name>
+      <password>3NeIiMnCVu47C+gIhEE8h5Ui2BIqcdl5zu2zhC78dm2Er9Sf7yrwOzvJmHfblF2zaBTZbeH/e/Nl42QiNIPeSg==</password>
+      <sessionID>$4000</sessionID>
+    </user_credentials>
+</root>

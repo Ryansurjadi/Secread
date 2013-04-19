@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<title>Secread</title>
 
 	<style type="text/css">
 
@@ -71,14 +71,39 @@
 
 	<div id="body">
 		<p>Selamat datang di Secread, disini kamu bisa menyimpan textfile hanya untuk kamu.</p>
-
+                
 		<p>Silahkan Login Jika Sudah Mendaftar</p>
-		<code>Disini nanti login</code>
-                <code>Disini nanti password</code>
-                <code>Disini nanti submit</code>
+                    
+                <?php if($this->session->flashdata('message')) : ?>
+                    <p><?php echo $this->session->flashdata('message'); ?></p>
+                <?php endif; ?>
+
+                <?php echo form_open('welcome/index'); ?>
+                    <?php echo form_fieldset('Login Form'); ?>
+
+                        <div class="textfield">
+                            <?php echo form_label('username', 'user_name'); ?>
+                            <?php echo form_error('user_name'); ?>
+                            <?php echo form_input('user_name', set_value('user_name')); ?>
+                        </div>
+
+                        <div class="textfield">
+                            <?php echo form_label('password', 'user_pass'); ?>
+                            <?php echo form_error('user_pass'); ?>
+                            <?php echo form_password('user_pass'); ?>
+                        </div>
+
+                        <div class="buttons">
+                            <?php echo form_submit('login', 'Login'); ?>
+                        </div>
+
+                    <?php echo form_fieldset_close(); ?>
+                <?php echo form_close(); ?>
 
 		<p>Silahkan Register Dimari Kalau Belum Mendaftar</p>
-		<code>Disini nanti register</code>
+		<code>
+                    <?php echo anchor('register/index', 'Register', 'class="link-class"') ?>
+                </code>
 
 	</div>
 
