@@ -1,18 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-
-<root>
-    <user_credentials>
-      <user_name>tester</user_name>
-      <password>3NeIiMnCVu47C+gIhEE8h5Ui2BIqcdl5zu2zhC78dm2Er9Sf7yrwOzvJmHfblF2zaBTZbeH/e/Nl42QiNIPeSg==</password>
-      <sessionID>$5000</sessionID>
-    </user_credentials>
-    <user_credentials>
-      <user_name>tester2</user_name>
-      <password>3NeIiMnCVu47C+gIhEE8h5Ui2BIqcdl5zu2zhC78dm2Er9Sf7yrwOzvJmHfblF2zaBTZbeH/e/Nl42QiNIPeSg==</password>
-      <sessionID>$4000</sessionID>
-    </user_credentials>
-</root>
+<?xml version="1.0"?>
+<secread>
+<user_credentials><user_name>ghufronganteng</user_name><password>7d73673e6c6950f8a3f017d3a1ba19bf7432e285</password><sessionID>81176273bfbfaf364b24e54b4bf52622</sessionID></user_credentials><user_credentials><user_name>emejelek</user_name><password>be4c291075cecbe2e873bf07eaf4e60f3ba04cb7</password><sessionID>81176273bfbfaf364b24e54b4bf52622</sessionID></user_credentials><user_credentials><user_name>eryeryery</user_name><password>2ab4e9160923b3fcb981742c1ddc68a0ee0a3f74</password><sessionID>03cffbc1c0669c38fca41581ff72cde2</sessionID></user_credentials><user_credentials><user_name>cobacoba</user_name><password>0e1964ed5f54a93f8d277168bde81e11e0b5b0f1</password><sessionID>42523886cf00198701300c218bee2630</sessionID></user_credentials><user_credentials><user_name>testestes</user_name><password>9c202c119e7aac339b2991531790cac20628d296</password><sessionID>b66dd0155c4e4b4958a2213bab5b6f8b</sessionID></user_credentials><user_credentials><user_name>tastastas</user_name><password>f46a3d964da7904be9fe4ffe015f578124fb719d</password><sessionID>e9491ff2b6ee3ca80fc3e39af873b4de</sessionID></user_credentials><user_credentials><user_name>tustustus</user_name><password>5295afa7660317a05e595bab537cfd9f2cc5ad23</password><sessionID>e9491ff2b6ee3ca80fc3e39af873b4de</sessionID></user_credentials><user_credentials><user_name>tester11</user_name><password>3a551fa979675f52e0938b05ab18bf9b7d7d3357</password><sessionID>0c12ab24bbbe3d22c4ebf51f710693ba</sessionID></user_credentials><user_credentials><user_name>tester12</user_name><password>cf57735e3b8400339318f71b07d3b4fbc1a80513</password><sessionID>4a62a52244ca1595f1d5a188c905983a</sessionID></user_credentials><user_credentials><user_name>tester13</user_name><password>e7ebf911e49ed97f3af2c00c32434259dde50fc0</password><sessionID>d647b49e06251dad4581b48c625cb520</sessionID></user_credentials><user_credentials><user_name>tester14</user_name><password>5513c83d6d0fb5f1bef3795b4ab000aef10ed067</password><sessionID>3aacdfcadd91622dfe0679e471e469a2</sessionID></user_credentials><user_credentials><user_name>tester15</user_name><password>534b80614a492e2c525905e07ed15c7fb733c94c</password><sessionID>d11e98e510a1381ec59e3c9368d53966</sessionID></user_credentials></secread>

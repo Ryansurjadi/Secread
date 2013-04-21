@@ -41,5 +41,9 @@ and open the template in the editor.
     <input type="submit" value="Simpan" />
    
     <?php echo form_close() ?>
+    
+    <code>
+                    <?php echo anchor('/file/logout', 'Logout') ?>
+                </code>
 </body>
 </html>

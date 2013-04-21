@@ -56,5 +56,8 @@ and open the template in the editor.
             }
             ?>
         </table>
+        <code>
+                    <?php echo anchor('/file/logout', 'Logout') ?>
+                </code>
     </body>
 </html>

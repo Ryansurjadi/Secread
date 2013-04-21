@@ -69,7 +69,36 @@
 <div id="container">
 	<h1>Welcome to Secread Registration!</h1>
         
+        <div id="body">
+            <?php //echo validation_errors(); ?>
+            <?php echo form_open('register/index'); ?>
+                <?php echo form_fieldset('Registration Form'); ?>
 
+                    <div class="textfield">
+                        <?php echo form_label('Username', 'user_name'); ?>
+                        <?php echo form_error('user_name'); ?>
+                        <?php echo form_input('user_name', set_value('user_name')); ?>
+                    </div>
+
+                    <div class="textfield">
+                        <?php echo form_label('Password', 'user_pass'); ?>
+                        <?php echo form_error('user_pass'); ?>
+                        <?php echo form_password('user_pass'); ?>
+                    </div>
+            
+                    <div class="textfield">
+                        <?php echo form_label('Confirm Password', 'confirm_pass'); ?>
+                        <?php echo form_error('confirm_pass'); ?>
+                        <?php echo form_password('confirm_pass'); ?>
+                    </div>
+
+                    <div class="buttons">
+                        <?php echo form_submit('register', 'Register'); ?>
+                    </div>
+
+                <?php echo form_fieldset_close(); ?>
+            <?php echo form_close(); ?>
+        </div>
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 </div>
 

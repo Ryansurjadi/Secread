@@ -78,6 +78,7 @@
                     <p><?php echo $this->session->flashdata('message'); ?></p>
                 <?php endif; ?>
 
+                <?php echo validation_errors(); ?>
                 <?php echo form_open('welcome/index'); ?>
                     <?php echo form_fieldset('Login Form'); ?>
 
@@ -102,7 +103,7 @@
 
 		<p>Silahkan Register Dimari Kalau Belum Mendaftar</p>
 		<code>
-                    <?php echo anchor('register/index', 'Register', 'class="link-class"') ?>
+                    <?php echo anchor('/register/index', 'Register') ?>
                 </code>
 
 	</div>

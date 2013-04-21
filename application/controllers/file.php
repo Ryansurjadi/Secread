@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /*
  * To change this template, choose Tools | Templates
@@ -12,7 +12,7 @@
  */
 class File extends CI_Controller {
 
-    private $path = 'D:/Testplace/Netbeans/Emeraldy';
+    //private $path = '';
     private $total = 0;
 
     function add() {
@@ -26,7 +26,8 @@ class File extends CI_Controller {
                 $data[$key] = $this->input->post($key);
             }
             $sanitizedFileName = $this->security->sanitize_filename($data['name']);
-            $fileList = get_filenames($this->path);
+            $path = $this->session->userdata('path');
+            $fileList = get_filenames($path);
             $boolean = TRUE;
             foreach ($fileList as $string => $nama) {
                 if (strcmp($sanitizedFileName, $nama) == 0) {
@@ -34,7 +35,8 @@ class File extends CI_Controller {
                 }
             }
             if ($boolean) {
-                $filePath = $this->path . DIRECTORY_SEPARATOR . $sanitizedFileName;
+                $filePath = $path . $sanitizedFileName;
+                //die($filePath);
                 $fileContent = $data['content'];
                 $is_success = write_file($filePath, $fileContent, 'w+');
             } else {
@@ -56,19 +58,20 @@ class File extends CI_Controller {
         $this->load->library("form_validation");
         $this->form_validation->set_rules("name", "Nama", "required|trim");
         $this->form_validation->set_rules("content", "Konten", "trim");
-
+        $path = $this->session->userdata('path');
         if ($this->form_validation->run()) {
             foreach ($_POST as $key => $val) {
                 $data[$key] = $this->input->post($key);
             }
             $decodedname = urldecode($name);
             $sanitizedFileName = $this->security->sanitize_filename($data['name']);
+            
             if (strcmp($decodedname, $sanitizedFileName)==0) {
-                $newPath = $this->path . DIRECTORY_SEPARATOR . $decodedname;
+                $newPath = $path . DIRECTORY_SEPARATOR . $decodedname;
                 $newContent = $data['content'];
                 $is_success = write_file($newPath, $newContent, 'w+');
             } else {
-                $fileList = get_filenames($this->path);
+                $fileList = get_filenames($path);
                 $boolean = TRUE;
                 foreach ($fileList as $string => $nama) {
                     if (strcmp($sanitizedFileName, $nama) == 0) {
@@ -76,9 +79,9 @@ class File extends CI_Controller {
                     }
                 }
                 if ($boolean) {
-                    $oldPath = $this->path . DIRECTORY_SEPARATOR . $decodedname;
+                    $oldPath = $path . DIRECTORY_SEPARATOR . $decodedname;
                     rename($oldPath, $sanitizedFileName);
-                    $filePath = $this->path . DIRECTORY_SEPARATOR . $sanitizedFileName;
+                    $filePath = $path . DIRECTORY_SEPARATOR . $sanitizedFileName;
                     $fileContent = $data['content'];
                     $is_success = write_file($filePath, $fileContent, 'w+');
                 } else {
@@ -94,8 +97,8 @@ class File extends CI_Controller {
             redirect("file");
         } else {
             $decodedname = urldecode($name);
-            $decodedpath = $this->path . DIRECTORY_SEPARATOR . $decodedname;
-            $fileList = get_filenames($this->path);
+            $decodedpath = $path . DIRECTORY_SEPARATOR . $decodedname;
+            $fileList = get_filenames($path);
             $boolean = TRUE;
             foreach ($fileList as $string => $nama) {
                 if (strcmp($decodedname, $nama) == 0) {
@@ -108,13 +111,16 @@ class File extends CI_Controller {
                     'content' => read_file($decodedpath),
                 );
                 $this->load->view("file_form", $data);
+            }else{
+                show_404();
             }
         }
     }
 
     function delete($name) {
+        $path = $this->session->userdata('path');
         $decodedname = urldecode($name);
-        $decodedpath = $this->path . DIRECTORY_SEPARATOR . $decodedname;
+        $decodedpath = $path . DIRECTORY_SEPARATOR . $decodedname;
         $is_success = unlink($decodedpath);
 
         if ($is_success) {
@@ -127,14 +133,55 @@ class File extends CI_Controller {
     }
 
     function index($offset = 0) {
-        $param['offset'] = $offset;
-        $param["data"] = get_dir_file_info($this->path);
+        // VALID USER CREDENTIALS
+        //$sss = read_file('../resource/accc.xml');
+        $doc = new DOMDocument();
+        $doc->load( './resource/accc.xml' );//xml file loading here
 
-        foreach ($param['data'] as $file => $isi) {
-            $this->total += 1;
+        $user_credentials = array();
+        $accs = $doc->getElementsByTagName( "user_credentials" );
+        foreach( $accs as $acc )
+        {
+            $uname = $acc->getElementsByTagName( "user_name" )->item(0)->nodeValue;
+            $password = $acc->getElementsByTagName( "password" )->item(0)->nodeValue;
+            if(strcmp($uname, $this->session->userdata('logged_user')) == 0){
+                $user_credentials[$uname] = array(
+                    'user_name' => $uname,
+                    'password' => $password // password
+                );
+                break;
+            }
         }
-        $param['total'] = $this->total;
-        $this->load->view("file_table", $param);
+        
+	if(strcmp($this->session->userdata('logged_user'), $user_credentials[$uname]['user_name']) == 0){
+            $path = './resource/' . $user_credentials[$uname]['password'] . '/';
+            
+            $this->session->set_userdata('path', $path);
+            //echo $path;
+            $param['offset'] = $offset;
+            $param["data"] = get_dir_file_info($path);
+
+            foreach ($param['data'] as $file => $isi) {
+                $this->total += 1;
+            }
+            $param['total'] = $this->total;
+            $this->load->view("file_table", $param);
+        
+        }
+        else{
+            $this->session->set_flashdata('message', 'Session Invalid');
+            //$this->session->sess_destroy();
+            //$this->load->view('welcome_message');
+            redirect('welcome/index');
+        }
+        
+    }
+    
+    public function logout(){
+        $this->session->unset_userdata('logged_user');
+        $this->session->unset_userdata('path');
+        $this->session->sess_destroy();
+        redirect('welcome/index/');
     }
 
 }
